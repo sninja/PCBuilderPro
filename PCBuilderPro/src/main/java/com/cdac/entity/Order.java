@@ -23,6 +23,9 @@ public class Order {
 	private float bill;
 	private String status;
 	
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Feedback feedback;
+
 	@ManyToOne
 	@JoinColumn(name = "cust_Id")
 	private Customer customer;
@@ -87,5 +90,13 @@ public class Order {
 
 	public void setComponents(List<Component> components) {
 		this.components = components;
+	}
+	
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 }
