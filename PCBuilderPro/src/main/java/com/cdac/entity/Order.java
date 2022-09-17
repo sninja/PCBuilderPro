@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "Order")
@@ -28,6 +30,7 @@ public class Order {
 
 	@ManyToOne
 	@JoinColumn(name = "cust_Id")
+	@JsonIgnore
 	private Customer customer;
 	
 	@ManyToMany(cascade = CascadeType.ALL)

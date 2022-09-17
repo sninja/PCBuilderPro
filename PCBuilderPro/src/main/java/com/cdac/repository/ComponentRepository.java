@@ -6,5 +6,5 @@ import com.cdac.entity.Component;
 import com.cdac.entity.Customer;
 
 public interface ComponentRepository extends CrudRepository<Component,Integer>{
-	Customer findByEmail(String email);
+	
 }
