@@ -18,6 +18,7 @@ public class ComponentService {
 	private ComponentRepository componentRepository;
 	
 	public void save(Component component) {
+
 		componentRepository.save(component);
 	}
 	
@@ -29,6 +30,7 @@ public class ComponentService {
 		componentRepository.save(component);
 	}
 	
+
 	public void remove(int id) {
 		componentRepository.deleteById(id);
 	}
@@ -36,4 +38,5 @@ public class ComponentService {
 	public List<Component> fetchOrderComponents(){
 		return (List<Component>) componentRepository.fetchComponentofOrder();
 	}
+
 }
