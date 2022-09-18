@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,6 +60,12 @@ public class EmployeeController {
 	    return feedbackService.fetchAllFeedbacks();
 	}
 	
+	@PostMapping("/add-employee")
+	public String addEmployee(@RequestBody Employee employee) {
+		employeeService.save(employee);
+		return "Employee Added successfully";
+	}
+
 	@ResponseBody
 	@GetMapping("/employees")
 	public List<Employee> getAllEmployees() {
@@ -85,7 +92,7 @@ public class EmployeeController {
 
 	
 	@DeleteMapping("/component/{id}")
-	public String carDelete(@PathVariable int id) {
+	public String componentDelete(@PathVariable int id) {
 		componentService.remove(id);
 		return "success";
 	}

@@ -35,8 +35,8 @@ public class ComponentService {
 		componentRepository.deleteById(id);
 	}
 	
-	public List<Component> fetchOrderComponents(){
-		return (List<Component>) componentRepository.fetchComponentofOrder();
+	public List<Component> fetchOrderComponents(int id){
+		return (List<Component>) componentRepository.fetchComponentofOrder(id);
 	}
 
 }

@@ -55,7 +55,7 @@ public class CustomerController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/components")
+	@GetMapping("/user_components")
 	public List<Component> getAllComponents(){
 		return componentService.fetchAllComponents();
 	}
@@ -86,7 +86,7 @@ public class CustomerController {
 	
 	@ResponseBody
 	@GetMapping("/ordercomponents")
-	public List<Component> getAllComponents() {
-	    return componentService.fetchOrderComponents();
+	public List<Component> fetchOrderComponents(@RequestParam("id") int id) {
+	    return componentService.fetchOrderComponents(id);
 	}
 }
