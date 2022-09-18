@@ -34,6 +34,7 @@ public class CustomerController {
 	@Autowired
 	private ComponentService componentService;
 	
+
 	@Autowired
 	private FeedbackService feedbackService;
 	
@@ -53,7 +54,6 @@ public class CustomerController {
 	    return orderService.fetchAllOrders();
 	}
 	
-
 	@ResponseBody
 	@GetMapping("/components")
 	public List<Component> getAllComponents(){
@@ -84,5 +84,9 @@ public class CustomerController {
 		return "feedback Added Successfully";
 	}
 	
-	
+	@ResponseBody
+	@GetMapping("/ordercomponents")
+	public List<Component> getAllComponents() {
+	    return componentService.fetchOrderComponents();
+	}
 }
