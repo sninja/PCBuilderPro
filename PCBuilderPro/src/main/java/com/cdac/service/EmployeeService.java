@@ -25,4 +25,8 @@ public class EmployeeService {
 	public List<Employee> fetchAllEmployees(){
 		return (List<Employee>) employeeRepository.findAll();
 	}
+	
+	public void update(Employee employee) {
+		employeeRepository.save(employee);
+}
 }

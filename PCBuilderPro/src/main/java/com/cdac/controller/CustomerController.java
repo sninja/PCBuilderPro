@@ -37,6 +37,6 @@ public class CustomerController {
 	@ResponseBody
 	@GetMapping("/customerOrders")
 	public List<Order> getAllOrders() {
-	    return orderService.fetchAllCustomers();
+	    return orderService.fetchAllOrders();
 	}
 }

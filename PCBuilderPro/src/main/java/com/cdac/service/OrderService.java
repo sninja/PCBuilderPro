@@ -22,7 +22,11 @@ public class OrderService {
 			orderRepository.save(order);
 	}
 	
-	public List<Order> fetchAllCustomers(){
+	public List<Order> fetchAllOrders(){
 		return (List<Order>) orderRepository.findAll();
 	}
+	
+	public void update(Order order) {
+		orderRepository.save(order);
+}
 }
