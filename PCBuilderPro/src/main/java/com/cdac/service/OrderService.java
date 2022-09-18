@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cdac.entity.Customer;
 import com.cdac.entity.Order;
-import com.cdac.exception.CustomerServiceException;
 import com.cdac.repository.OrderRepository;
 
 @Service
@@ -28,5 +26,5 @@ public class OrderService {
 	
 	public void update(Order order) {
 		orderRepository.save(order);
-}
+	}
 }
