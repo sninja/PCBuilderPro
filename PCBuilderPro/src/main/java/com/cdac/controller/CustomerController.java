@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdac.entity.Customer;
+import com.cdac.entity.Order;
 import com.cdac.exception.CustomerServiceException;
 import com.cdac.service.CustomerService;
+import com.cdac.service.OrderService;
 
 @RestController
 public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@PostMapping("/register")
 	public String addCustomer(@RequestBody Customer customer) {
@@ -30,9 +35,8 @@ public class CustomerController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/customers")
-	public List<Customer> getAllCustomers() {
-	    return customerService.fetchAllCustomers();
+	@GetMapping("/customerOrders")
+	public List<Order> getAllOrders() {
+	    return orderService.fetchAllCustomers();
 	}
- 
 }

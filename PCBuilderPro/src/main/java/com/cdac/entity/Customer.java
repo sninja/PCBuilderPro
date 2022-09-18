@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Customer")
@@ -21,7 +22,7 @@ public class Customer {
 	private String address;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	@JsonIgnore
+	@JsonManagedReference
 	private List<Order> orders;
 
 	public int getCustId() {
