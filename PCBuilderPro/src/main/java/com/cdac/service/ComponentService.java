@@ -32,4 +32,8 @@ public class ComponentService {
 	public void remove(int id) {
 		componentRepository.deleteById(id);
 	}
+	
+	public List<Component> fetchOrderComponents(){
+		return (List<Component>) componentRepository.fetchComponentofOrder();
+	}
 }

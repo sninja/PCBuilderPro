@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cdac.entity.Component;
 import com.cdac.entity.Customer;
 import com.cdac.entity.Order;
 import com.cdac.exception.CustomerServiceException;
+import com.cdac.service.ComponentService;
 import com.cdac.service.CustomerService;
 import com.cdac.service.OrderService;
 
@@ -23,6 +25,9 @@ public class CustomerController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private ComponentService componentService;
 	
 	@PostMapping("/register")
 	public String addCustomer(@RequestBody Customer customer) {
@@ -38,5 +43,11 @@ public class CustomerController {
 	@GetMapping("/customerOrders")
 	public List<Order> getAllOrders() {
 	    return orderService.fetchAllOrders();
+	}
+	
+	@ResponseBody
+	@GetMapping("/ordercomponents")
+	public List<Component> getAllComponents() {
+	    return componentService.fetchOrderComponents();
 	}
 }
