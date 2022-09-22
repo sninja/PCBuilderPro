@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.cdac.entity.Component;
-import com.cdac.entity.Customer;
 
 public interface ComponentRepository extends CrudRepository<Component,Integer>{
 	

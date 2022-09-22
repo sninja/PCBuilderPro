@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -80,14 +79,6 @@ public class Order {
 		this.status = status;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public List<Component> getComponents() {
 		return components;
 	}
@@ -102,5 +93,5 @@ public class Order {
 
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
-	}
+	}	
 }

@@ -10,9 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.cdac.entity.Component;
 import com.cdac.entity.Customer;
 import com.cdac.entity.Order;
+import com.cdac.entity.Role;
+import com.cdac.entity.User;
 import com.cdac.repository.ComponentRepository;
 import com.cdac.repository.CustomerRepository;
 import com.cdac.repository.OrderRepository;
+import com.cdac.service.UserService;
 
 @SpringBootTest
 class PcBuilderProApplicationTests {
@@ -25,6 +28,9 @@ class PcBuilderProApplicationTests {
 	
 	@Autowired
 	private ComponentRepository componentRepository;
+	
+	@Autowired
+	private UserService userService;
 
 	@Test
 	void addCustomer() {
@@ -55,7 +61,7 @@ class PcBuilderProApplicationTests {
 					order.setDeliveredDate(new java.util.Date()); 
 					order.setBill(57980.5f);
 					order.setStatus("Processing"); 
-					order.setCustomer(customer);
+					//order.setCustomer(customer);
 					orderRepository.save(order); 
 					//p.setDateOfBirth(LocalDate.of(1999, 12, 25));
 
@@ -70,5 +76,24 @@ class PcBuilderProApplicationTests {
 		  component.setPrice(35862);
 		  component.setStatus("available"); 
 		  componentRepository.save(component);
+	}
+	
+	@Test
+	void addRole() {
+		Role role = new Role();
+		role.setName("customer");
+		userService.saveRole(role);
+	}
+	
+	@Test
+	void addUser() {
+		
+		  User user = new User(); user.setName("sumit singh");
+		  user.setAddress("Saket Nagar, Kanpur, Uttar Pradesh - 208014");
+		  user.setEmail("sumit@gmail.com"); user.setMobile("9725741597");
+		  user.setPassword("1234"); userService.saveUser(user);
+		 
+		
+		userService.addRoleToUser("sumit@gmail.com", "admin");
 	}
 }
