@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdac.entity.Component;
-import com.cdac.entity.Customer;
-import com.cdac.entity.Employee;
 import com.cdac.entity.Feedback;
 import com.cdac.entity.Order;
+import com.cdac.entity.User;
 import com.cdac.service.ComponentService;
 import com.cdac.service.CustomerService;
 import com.cdac.service.EmployeeService;
@@ -26,6 +27,7 @@ import com.cdac.service.OrderService;
 
 @RestController
 @CrossOrigin("http://localhost:3000/")
+@RequestMapping("/employee")
 public class EmployeeController {
 	
 	@Autowired
@@ -46,7 +48,7 @@ public class EmployeeController {
 	
 	@ResponseBody
 	@GetMapping("/customers")
-	public List<Customer> getAllCustomers() {
+	public List<User> getAllCustomers() {
 	    return customerService.fetchAllCustomers();
 	}
 	
@@ -62,28 +64,40 @@ public class EmployeeController {
 	    return feedbackService.fetchAllFeedbacks();
 	}
 	
-	@PostMapping("/add-employee")
-	public String addEmployee(@RequestBody Employee employee) {
-		employeeService.save(employee);
-		return "Employee Added successfully";
-	}
+	/*
+	 * @PostMapping("/add-employee") public String addEmployee(@RequestBody Employee
+	 * employee) { employeeService.save(employee); return
+	 * "Employee Added successfully"; }
+	 */
 
 	@ResponseBody
 	@GetMapping("/employees")
-	public List<Employee> getAllEmployees() {
+	public List<User> getAllEmployees() {
 	    return employeeService.fetchAllEmployees();
 	}
 	
-	@PutMapping("/updateemployee")
-	public String employeeUpdate(@RequestBody Employee employee) {
-		employeeService.update(employee);
-		return "success";
+	@PutMapping("/updateemployee/{id}")
+	public String employeeUpdate(@PathVariable int id ,@RequestBody User user) {
+		employeeService.updateById(id, user);
+		return "emoloyee updated successfully";
 	}
 	
-	@PutMapping("/updateorder")
-	public String orderUpdate(@RequestBody Order order) {
-		orderService.update(order);
-		return "success";
+	@PutMapping("/updateorder/{id}")
+	public String orderUpdate(@PathVariable int id, @RequestBody Order order) {
+		orderService.updateById(id, order);
+		return "order updated successfully";
+	}
+	
+	@DeleteMapping("/deleteOrder/{id}")
+	public String deleteOrder(@PathVariable int id) {
+		orderService.delete(id);
+		return "order deleted successfully";
+	}
+	
+	@PostMapping("/addComponent")
+	public String addOrder(@RequestBody Component component) {
+		componentService.save(component);
+		return "Component added successfully";
 	}
 	
 	@ResponseBody
@@ -91,11 +105,29 @@ public class EmployeeController {
 	public List<Component> getAllComponents(){
 		return componentService.fetchAllComponents();
 	}
+	
+	@PutMapping("/updateComponent/{id}")
+	public String componentUpdate(@PathVariable int id, @RequestBody Component component) {
+		componentService.updateById(id, component);
+		return "Component updated successfully";
+	}
 
 	
-	@DeleteMapping("/component/{id}")
+	@DeleteMapping("/componentDelete/{id}")
 	public String componentDelete(@PathVariable int id) {
 		componentService.remove(id);
+		return "success";
+	}
+	
+	@DeleteMapping("/deleteEmployee/{id}")
+	public String employeeDelete(@PathVariable int id) {
+		employeeService.remove(id);
+		return "success";
+	}
+	
+	@DeleteMapping("/deleteCustomer/{id}")
+	public String customerDelete(@PathVariable int id) {
+		customerService.remove(id);
 		return "success";
 	}
 }

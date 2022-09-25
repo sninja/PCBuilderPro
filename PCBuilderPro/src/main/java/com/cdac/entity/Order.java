@@ -16,25 +16,28 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderId;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private java.util.Date orderDate = new Date(System.currentTimeMillis());
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private java.util.Date deliveredDate;
 	
-	private float bill;
 	private String status;
+	private String trasactionId;
 	
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private Feedback feedback;
+	
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Bill bill;
 
 	@ManyToOne
 	@JoinColumn(name = "cust_Id")
 	@JsonBackReference
-	private Customer customer;
+	private User user;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "order_component",
+	@JoinTable(name = "order_details",
 		joinColumns = @JoinColumn(name = "order_Id"),
 		inverseJoinColumns = @JoinColumn(name = "comp_Id"))
 	private List<Component> components;
@@ -63,20 +66,44 @@ public class Order {
 		this.deliveredDate = deliveredDate;
 	}
 
-	public float getBill() {
-		return bill;
-	}
-
-	public void setBill(float bill) {
-		this.bill = bill;
-	}
-
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getTrasactionId() {
+		return trasactionId;
+	}
+
+	public void setTrasactionId(String trasactionId) {
+		this.trasactionId = trasactionId;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
+	}
+
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<Component> getComponents() {
@@ -86,12 +113,8 @@ public class Order {
 	public void setComponents(List<Component> components) {
 		this.components = components;
 	}
-	
-	public Feedback getFeedback() {
-		return feedback;
-	}
 
-	public void setFeedback(Feedback feedback) {
-		this.feedback = feedback;
-	}	
+		
+	
+	
 }
