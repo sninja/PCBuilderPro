@@ -13,7 +13,7 @@ public class Component {
 	private String name;
 	private String category;
 	private float price;
-	private String desciption;
+	private String description;
 	private int quantity;
 	private String link;
 		
@@ -54,12 +54,13 @@ public class Component {
 		this.price = price;
 	}
 
-	public String getDesciption() {
-		return desciption;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getQuantity() {
