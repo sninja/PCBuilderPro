@@ -30,6 +30,11 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.getUsers());
 	}
 	
+	@GetMapping("/userName")
+	public String getUserName(String email) {
+	    return userService.getUser(email).getName();
+	}
+	
 	//@GetMapping("/user/save")
 	@PostMapping("/register/customer")
 	public String saveCustomer(@RequestBody User user){
