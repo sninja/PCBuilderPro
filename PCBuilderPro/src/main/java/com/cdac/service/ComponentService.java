@@ -35,7 +35,7 @@ public class ComponentService {
 			dbcomponent.setName(component.getName());
 			dbcomponent.setCategory(component.getCategory());
 			dbcomponent.setPrice(component.getPrice());
-			dbcomponent.setDesciption(component.getDesciption());
+			dbcomponent.setDescription(component.getDescription());
 			dbcomponent.setQuantity(component.getQuantity());
 			dbcomponent.setLink(component.getLink());
 			componentRepository.save(dbcomponent);
