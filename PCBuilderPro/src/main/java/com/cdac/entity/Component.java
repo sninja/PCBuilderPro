@@ -13,7 +13,10 @@ public class Component {
 	private String name;
 	private String category;
 	private float price;
-	private String status;
+	private String description;
+	private int quantity;
+	private String link;
+		
 	
 	/*
 	 * @ManyToMany(mappedBy = "components") private List<Order> orders;
@@ -51,11 +54,30 @@ public class Component {
 		this.price = price;
 	}
 
-	public String getStatus() {
-		return status;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	
 }
