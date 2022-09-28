@@ -55,5 +55,15 @@ public class ComponentService {
 	public List<Component> fetchOrderComponents(int id){
 		return (List<Component>) componentRepository.fetchComponentofOrder(id);
 	}
+	
+	//method to update stock of components after checkout
+	public void stockUpdate(List<Component> list) {
+		for(int i=0; i<list.size(); i++) {
+			int q = list.get(i).getQuantity();
+			System.out.println("checking quantity: " + q);
+			list.get(i).setQuantity(--q);
+			componentRepository.save(list.get(i));
+		}
+	}
 
 }

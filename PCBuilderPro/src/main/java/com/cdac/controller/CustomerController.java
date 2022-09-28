@@ -121,6 +121,7 @@ public class CustomerController {
 		order.setBill(billob);
 		order.setUser(user.get());
 		order.setComponents(temp);
+		componentService.stockUpdate(temp);
 		billob.setOrder(order);
 		orderService.save(order);
 		cartRepository.deleteAll();
@@ -132,13 +133,7 @@ public class CustomerController {
 		return (List<Cart>) cartRepository.findAll();
 	}
 	
-	/*
-	 * @PutMapping("/update-order") public String updateOrder(@RequestBody Order
-	 * order) { orderService.save(order); return "Order updated successfully"; }
-	 */
-	
-	
-	
+		
 	@PostMapping("/addFeedback")
 	public String addFeedback(@RequestBody Feedback feedback) {
 		feedbackService.save(feedback);
