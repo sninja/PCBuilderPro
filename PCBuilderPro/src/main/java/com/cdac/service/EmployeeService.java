@@ -34,6 +34,7 @@ public class EmployeeService {
 			User dbUser = user1.get();
 			dbUser.setName(user.getName());
 			dbUser.setEmail(user.getEmail());
+			dbUser.setPassword(user.getPassword());
 			dbUser.setMobile(user.getMobile());
 			dbUser.setStreet(user.getStreet());
 			dbUser.setCity(user.getCity());

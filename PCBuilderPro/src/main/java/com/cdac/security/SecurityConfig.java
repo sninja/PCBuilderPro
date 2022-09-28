@@ -56,11 +56,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/api/register").permitAll();
 		http.authorizeRequests().antMatchers("/api/userName/**").permitAll();
+		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("customer");
+		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("customer");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/components/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/components/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/register/employee**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customerOrders/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/customers/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/orders/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/feedbacks/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/employees/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateemployee/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateComponent/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateorder/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/deleteOrder/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/employee/addComponent/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/componentDelete/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/deleteEmployee/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/deleteCustomer/{id}/**").hasAnyAuthority("admin");
 		//http.authorizeRequests().anyRequest().authenticated();
 		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll(); //added line
 		http.addFilter(customAuthenticationFilter);
@@ -78,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("*"));
 		configuration.setAllowedHeaders(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+		configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;

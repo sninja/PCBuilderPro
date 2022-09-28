@@ -1,4 +1,4 @@
-package com.cdac.service;
+	package com.cdac.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +19,13 @@ public class ComponentService {
 	private ComponentRepository componentRepository;
 	
 	public void save(Component component) {
-
 		componentRepository.save(component);
+	}
+	
+	public Component fetchbyId(int id) {
+		Optional<Component> component = componentRepository.findById(id);
+		return component.get();
+		
 	}
 	
 	public List<Component> fetchAllComponents(){
@@ -37,10 +42,9 @@ public class ComponentService {
 			dbcomponent.setPrice(component.getPrice());
 			dbcomponent.setDescription(component.getDescription());
 			dbcomponent.setQuantity(component.getQuantity());
-			dbcomponent.setLink(component.getLink());
+			//dbcomponent.setLink(component.getLink());
 			componentRepository.save(dbcomponent);
 		}
-		
 	}
 	
 

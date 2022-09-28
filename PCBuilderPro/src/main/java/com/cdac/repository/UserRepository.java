@@ -17,7 +17,7 @@ public interface UserRepository extends CrudRepository<User,Integer>{
 			+ "FROM user\r\n"
 			+ "INNER JOIN user_roles\r\n"
 			+ "ON user.id = user_roles.user_id\r\n"
-			+ "WHERE user_roles.role_id = :id;", nativeQuery = true)
+			+ "WHERE user_roles.roles_id = :id", nativeQuery = true)
 	public List<User> findByRole(@Param("id") int id);
 }
  

@@ -17,7 +17,7 @@ public class Order {
 	private int orderId;
 	
 	@Temporal(TemporalType.DATE)
-	private java.util.Date orderDate = new Date(System.currentTimeMillis());
+	private java.util.Date orderDate = new Date();
 	
 	@Temporal(TemporalType.DATE)
 	private java.util.Date deliveredDate;
@@ -36,7 +36,7 @@ public class Order {
 	@JsonBackReference
 	private User user;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "order_details",
 		joinColumns = @JoinColumn(name = "order_Id"),
 		inverseJoinColumns = @JoinColumn(name = "comp_Id"))
