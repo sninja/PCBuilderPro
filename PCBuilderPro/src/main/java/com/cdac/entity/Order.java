@@ -40,7 +40,6 @@ public class Order {
 	private User user;
 	
 	@ManyToMany(cascade = CascadeType.MERGE)
-	@JsonManagedReference
 	@JoinTable(name = "order_details",
 		joinColumns = @JoinColumn(name = "order_Id"),
 		inverseJoinColumns = @JoinColumn(name = "comp_Id"))
