@@ -2,6 +2,8 @@ package com.cdac.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Feedback")
 public class Feedback {
@@ -14,6 +16,7 @@ public class Feedback {
 	private String description;
 	
 	@OneToOne
+	@JsonBackReference
 	@JoinColumn(name = "order_id")
 	private Order order;
 

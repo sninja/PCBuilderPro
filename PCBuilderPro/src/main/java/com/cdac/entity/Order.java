@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -26,9 +27,11 @@ public class Order {
 	private String trasactionId;
 	
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Feedback feedback;
 	
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Bill bill;
 
 	@ManyToOne
@@ -37,6 +40,7 @@ public class Order {
 	private User user;
 	
 	@ManyToMany(cascade = CascadeType.MERGE)
+	@JsonManagedReference
 	@JoinTable(name = "order_details",
 		joinColumns = @JoinColumn(name = "order_Id"),
 		inverseJoinColumns = @JoinColumn(name = "comp_Id"))
