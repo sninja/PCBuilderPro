@@ -148,8 +148,8 @@ public class CustomerController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/orderComponents")
-	public List<Component> fetchOrderComponents(@RequestParam("id") int id) {
+	@GetMapping("/orderComponents/{id}")
+	public List<Component> fetchOrderComponents(@PathVariable int id) {
 	    return componentService.fetchOrderComponents(id);
 	}
 }
