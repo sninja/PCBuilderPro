@@ -94,16 +94,16 @@ class PcBuilderProApplicationTests {
 	void addUser() {
 
 		User user = new User();
-		user.setName("sumit singh");
-		user.setStreet("127 w-1 block");
-		user.setCity("Kanpur");
+		user.setName("Karan Singh");
+		user.setStreet("427 w-1 block");
+		user.setCity("Lucknow");
 		user.setState("Uttar Pradesh");
-		user.setPincode(208014);
-		user.setEmail("sumit@gmail.com");
-		user.setMobile(9415784189L);
+		user.setPincode(280051);
+		user.setEmail("karan@gmail.com");
+		user.setMobile(8750987585L);
 		user.setPassword("1234");
 		userService.saveUser(user);
 
-		userService.addRoleToUser("sumit@gmail.com", "admin");
+		userService.addRoleToUser("karan@gmail.com", "employee");
 	}
 }

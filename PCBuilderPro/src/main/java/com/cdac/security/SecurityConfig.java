@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(
 				authenticationManagerBean());
-		//customAuthenticationFilter.setFilterProcessesUrl("/api/login");
+		customAuthenticationFilter.setFilterProcessesUrl("/login");
 		http.csrf().disable();
 		http
         // by default uses a Bean by the name of corsConfigurationSource
@@ -58,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/api/userName/**").permitAll();
 		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("customer");
 		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("customer");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("customer");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("customer");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").permitAll();
 		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("admin");
 		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("admin");
 		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("employee");
@@ -67,22 +67,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/components/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/register/employee**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customerOrders/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/customers/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/orders/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/feedbacks/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/employees/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customerOrders/**").hasAnyAuthority("admin","employee");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/customers/**").hasAnyAuthority("admin","employee");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/orders/**").hasAnyAuthority("admin","employee");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/feedbacks/**").hasAnyAuthority("admin","employee");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/employees/**").hasAnyAuthority("admin","employee");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateemployee/{id}/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateComponent/{id}/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateorder/{id}/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/employee/updateorder/{id}/**").hasAnyAuthority("admin","employee");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/deleteOrder/{id}/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/employee/addComponent/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/componentDelete/{id}/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/deleteEmployee/{id}/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/employee/deleteCustomer/{id}/**").hasAnyAuthority("admin");
 		//http.authorizeRequests().anyRequest().authenticated();
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll(); //added line
+		//http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll(); //added line
 		http.addFilter(customAuthenticationFilter);
 		http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -20,7 +21,8 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private java.util.Date orderDate = new Date();
 	
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private java.util.Date deliveredDate;
 	
 	private String status;
