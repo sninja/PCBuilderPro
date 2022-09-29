@@ -66,9 +66,11 @@ public class CustomerController {
 	 */
 	
 	@ResponseBody
-	@GetMapping("/customerOrders/{id}")
-	public List<Order> getAllOrders(@PathVariable int id) {
-	    return customerService.fetchOrder(id);
+	@GetMapping("/customerOrders/{email}")
+	public List<Order> getAllOrders(@PathVariable String email) {
+		User user = userRepository.findByEmail(email);
+		//System.out.println("IDDDDDDDDDDDDDDDDDDDDDDDDDD ==== " + user.getId());
+		return customerService.fetchOrder(user.getId());
 	}
 	
 	@ResponseBody
@@ -91,8 +93,8 @@ public class CustomerController {
 	}
 	
 	
-	@PostMapping("/addOrder/{id}")
-	public String addOrder(@PathVariable int id) {
+	@PostMapping("/addOrder/{email}")
+	public String addOrder(@PathVariable String email) {
 		
 		/* Generating random transaction ID */
 		int leftLimit = 48; // numeral '0'
@@ -106,7 +108,7 @@ public class CustomerController {
 	      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 	      .toString();
 	//========================================	
-		Optional<User> user = userRepository.findById(id);
+		User user = userRepository.findByEmail(email);
 		List<Cart> cart = (List<Cart>) cartRepository.findAll();
 		float bill = cartRepository.fetchBill();
 		//creating bill
@@ -119,20 +121,25 @@ public class CustomerController {
 		order.setStatus("Processing");
 		order.setTrasactionId(generatedString);
 		order.setBill(billob);
-		order.setUser(user.get());
+		order.setUser(user);
 		order.setComponents(temp);
 		componentService.stockUpdate(temp);
 		billob.setOrder(order);
 		orderService.save(order);
+		//temp.clear();
 		cartRepository.deleteAll();
 		return "order Added Successfully";
 	}
 	
-	@PostMapping("/getCart")
+	@GetMapping("/getCart")
 	public List<Cart> getCartItems(){
 		return (List<Cart>) cartRepository.findAll();
 	}
 	
+	@GetMapping("/getBill")
+	public float getBilldata() {
+		return cartRepository.fetchBill();
+	}
 		
 	@PostMapping("/addFeedback")
 	public String addFeedback(@RequestBody Feedback feedback) {
@@ -141,8 +148,8 @@ public class CustomerController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/orderComponents")
-	public List<Component> fetchOrderComponents(@RequestParam("id") int id) {
+	@GetMapping("/orderComponents/{id}")
+	public List<Component> fetchOrderComponents(@PathVariable int id) {
 	    return componentService.fetchOrderComponents(id);
 	}
 }

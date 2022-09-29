@@ -54,14 +54,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		//http.authorizeRequests().antMatchers("/login").permitAll();
-		http.authorizeRequests().antMatchers("/api/register").permitAll();
+		http.authorizeRequests().antMatchers("/api/register/customer").permitAll();
 		http.authorizeRequests().antMatchers("/api/userName/**").permitAll();
 		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("customer");
 		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("customer");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("customer");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("customer");
+		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("admin");
+		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("admin");
+		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("employee");
+		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/customer/**").hasAnyAuthority("employee");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("admin");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/components/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/components/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/register/employee**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/customerOrders/**").hasAnyAuthority("admin");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/employee/customers/**").hasAnyAuthority("admin");

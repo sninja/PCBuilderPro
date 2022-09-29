@@ -17,9 +17,9 @@ public interface ComponentRepository extends CrudRepository<Component,Integer>{
 	@Query(
 			  value = "SELECT component.*\r\n"
 			  		+ "FROM component\r\n"
-			  		+ "INNER JOIN order_component\r\n"
-			  		+ "ON component.comp_id = order_component.comp_id\r\n"
-			  		+ "WHERE order_component.order_id = :id", 
+			  		+ "INNER JOIN order_details\r\n"
+			  		+ "ON component.comp_id = order_details.comp_id\r\n"
+			  		+ "WHERE order_details.order_id = :id", 
 			  nativeQuery = true)
 	public List<Component> fetchComponentofOrder(@Param("id") int id);
 }

@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Bill")
 public class Bill {
@@ -20,6 +22,7 @@ public class Bill {
 	private float amount;
 	
 	@OneToOne
+	@JsonBackReference
 	@JoinColumn(name = "order_id")
 	private Order order;
 
