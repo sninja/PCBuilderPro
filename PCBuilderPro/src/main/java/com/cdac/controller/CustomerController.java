@@ -92,6 +92,12 @@ public class CustomerController {
 		return " Added to cart Successfully";
 	}
 	
+	@DeleteMapping("/deleteItem/{id}")
+	public String deleteItem(@PathVariable int id) {
+		cartRepository.deleteById(id);
+		return "Item deleted successfully";
+	} 
+	
 	
 	@PostMapping("/addOrder/{email}")
 	public String addOrder(@PathVariable String email) {
