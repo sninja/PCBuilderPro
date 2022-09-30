@@ -141,9 +141,9 @@ public class CustomerController {
 		return cartRepository.fetchBill();
 	}
 		
-	@PostMapping("/addFeedback")
-	public String addFeedback(@RequestBody Feedback feedback) {
-		feedbackService.save(feedback);
+	@PostMapping("/addFeedback/{id}")
+	public String addFeedback(@PathVariable int id, @RequestBody Feedback feedback) {
+		feedbackService.save(id, feedback);
 		return "feedback Added Successfully";
 	}
 	
