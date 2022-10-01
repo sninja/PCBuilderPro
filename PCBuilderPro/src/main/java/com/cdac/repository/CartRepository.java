@@ -8,6 +8,8 @@ import com.cdac.entity.Cart;
 public interface CartRepository extends CrudRepository<Cart,Integer> {
 
 	
+	boolean existsByName(String name);
+	
 	@Query("SELECT SUM(c.price) FROM Cart c")
 	public float fetchBill();
 }
