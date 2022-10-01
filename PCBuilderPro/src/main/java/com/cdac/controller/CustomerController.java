@@ -143,6 +143,17 @@ public class CustomerController {
 		return (List<Cart>) cartRepository.findAll();
 	}
 	
+	@PostMapping("/clearCart")
+	public void deleteCart() {
+		cartRepository.deleteAll();
+	}
+	
+	
+	@GetMapping("/getCartNumber")
+	public long countCartItems() {
+		return cartRepository.count();
+	}
+	
 	@GetMapping("/getBill")
 	public float getBilldata() {
 		return cartRepository.fetchBill();
