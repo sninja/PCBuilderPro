@@ -29,6 +29,7 @@ import com.cdac.repository.CartRepository;
 import com.cdac.repository.UserRepository;
 import com.cdac.service.ComponentService;
 import com.cdac.service.CustomerService;
+import com.cdac.service.EmailSenderService;
 import com.cdac.service.FeedbackService;
 import com.cdac.service.OrderService;
 
@@ -55,7 +56,11 @@ public class CustomerController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private EmailSenderService emailSenderService;
+
 	List<Component> temp = new ArrayList();
+	String OTP;
 
 	/*
 	 * @PostMapping("/register") public String addCustomer(@RequestBody Customer
@@ -68,7 +73,6 @@ public class CustomerController {
 	@GetMapping("/customerOrders/{email}")
 	public List<Order> getAllOrders(@PathVariable String email) {
 		User user = userRepository.findByEmail(email);
-		// System.out.println("IDDDDDDDDDDDDDDDDDDDDDDDDDD ==== " + user.getId());
 		return customerService.fetchOrder(user.getId());
 	}
 
@@ -132,10 +136,43 @@ public class CustomerController {
 		order.setComponents(temp);
 		componentService.stockUpdate(temp);
 		billob.setOrder(order);
-		orderService.save(order);
+		// emailSenderService.sendEmail(email);
+//		if ((emailSenderService.get()).equalsIgnoreCase(OTP)) {
+			orderService.save(order);
+			cartRepository.deleteAll();
+			//System.out.println("Email service" + emailSenderService.get());
+			//System.out.println("Frontend " + OTP);
+			return "order Added Successfully";
+//		} else {
+//			System.out.println("Email service" + emailSenderService.get());
+//			System.out.println("Frontend " + OTP);
+//			return "OTP is invalid";
+//		}
+			
+
 		// temp.clear();
-		cartRepository.deleteAll();
-		return "order Added Successfully";
+
+	}
+
+	public void setOTP(String a) {
+		OTP = a;
+	}
+
+	@PostMapping("/sendMail/{email}")
+	public String sendMail(@PathVariable String email) {
+		try {
+			System.out.println("Email" + email);
+			emailSenderService.sendEmail(email);
+			return "Email sent";
+		} catch (Exception e) {
+			return "some error";
+		}
+
+	}
+
+	@PostMapping("/getOTP/{otp}")
+	public void OTP(@PathVariable String otp) {
+		setOTP(otp);
 	}
 
 	@GetMapping("/getCart")

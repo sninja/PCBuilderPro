@@ -21,6 +21,7 @@ import com.cdac.entity.Order;
 import com.cdac.entity.User;
 import com.cdac.service.ComponentService;
 import com.cdac.service.CustomerService;
+import com.cdac.service.EmailSenderService;
 import com.cdac.service.EmployeeService;
 import com.cdac.service.FeedbackService;
 import com.cdac.service.OrderService;
@@ -45,6 +46,15 @@ public class EmployeeController {
 	@Autowired
 	private ComponentService componentService;
 	
+	@Autowired 
+	private EmailSenderService emailSenderService;
+	
+	
+	@PostMapping("/sendMail")
+	public String sendMail(String email) {
+		emailSenderService.sendEmail(email);
+		return "OTP sent on your email";
+	}
 	
 	@ResponseBody
 	@GetMapping("/customers")
